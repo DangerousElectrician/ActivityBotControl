@@ -1,6 +1,5 @@
 
 #include "fdserial.h"
-#include "serialcom.h"
 
 #include "serialcom.h"
 
