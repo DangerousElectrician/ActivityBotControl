@@ -66,11 +66,18 @@ void update()
 */
 
 
-void talk()
+int main()
 {
-  int command =0;
-	startComs( RXPIN, TXPIN, BAUD, TOUT);
-  simpleterm_open();
+// start movement cog
+// cog continously streams data to commuication cog
+//communicatoin cog talks to the computer when it needs to
+    //simpleterm_close();
+    int *cog = cog_run(&wander, 200); //FROM WANDER LIB
+    
+    
+    int command =0;
+	  startComs( RXPIN, TXPIN, BAUD, TOUT);
+  //simpleterm_open();
   
   
   
@@ -86,40 +93,27 @@ void talk()
       
       txInt32(66); //debug
       
-      print("idiflis\n");
+      ////print("idiflis\n");
     }
     else if (command == 'f')
     {
      // something else
       txInt32(71); //debug
-      print("f reciecved\n");
+      ////print("f reciecved\n");
     }
     else if (command == 'o')
     {
       //something else
       txInt32(80); //debug
-      print("OOOOHHHHHH RECIEVED!!!\n");
+      //////print("OOOOHHHHHH RECIEVED!!!\n");
     }
     else if (command ==-1) //you're fucked
     {
       //timeout
       txInt32(64);//debug
-      print("loveMEEEEE\\!!!\n");
+      ////////print("loveMEEEEE\\!!!\n");
     }      
 	}
-
-}
-
-int main()
-{
-// start movement cog
-// cog continously streams data to commuication cog
-//communicatoin cog talks to the computer when it needs to
-    simpleterm_close();
-    int *cog = cog_run(&wander, 100); //FROM WANDER LIB
-    int *cog2 = cog_run(&talk, 100);
-   
-    while (true);
 
 
 }
