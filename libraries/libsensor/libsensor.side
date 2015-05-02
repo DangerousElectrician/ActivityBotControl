@@ -8,4 +8,5 @@ sensor.c
 >-Wall
 >-fno-exceptions
 >defs::-std=c99
+>-create_library
 >BOARD::GENERIC
