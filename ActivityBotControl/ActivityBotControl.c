@@ -67,6 +67,10 @@ int main()
         txInt32(getWhiskerR());
         break;
         
+      case 'h':
+        drive_speed(rxInt32(),rxInt32());
+        break;
+        
       case 'q':
         drive_speed(0,0);
         break;
