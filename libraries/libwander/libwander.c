@@ -5,6 +5,5 @@
 #include "wander.h"
 int main()
 {
-  startSensor(8,0,1);
   startWander();
 }
