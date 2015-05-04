@@ -7,6 +7,7 @@
 #include "serialcom.h"
 #include "sensor.h"
 #include "wander.h"
+//define pins of sensors
 #define PING_PIN 8
 #define LEFT_WHISKER 1
 #define RIGHT_WHISKER 0
