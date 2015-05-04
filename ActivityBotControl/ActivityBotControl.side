@@ -1,6 +1,10 @@
 ActivityBotControl.c
 -I ./../libraries/libserialcom
 -L ./../libraries/libserialcom
+-I ./../libraries/libsensor
+-L ./../libraries/libsensor
+-I ./../libraries/libwander
+-L ./../libraries/libwander
 >compiler=C
 >memtype=cmm main ram compact
 >optimize=-Os
@@ -8,5 +12,5 @@ ActivityBotControl.c
 >-Wall
 >-fno-exceptions
 >defs::-std=c99
->linker::-lserialcom
+>linker::-lserialcom -lsensor -lwander
 >BOARD::ACTIVITYBOARD

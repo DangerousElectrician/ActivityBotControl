@@ -1,7 +1,16 @@
 
 #include "fdserial.h"
+#include "abdrive.h"
+#include "simpletools.h"
+#include "ping.h"
 
 #include "serialcom.h"
+#include "sensor.h"
+#include "wander.h"
+
+#define PING_PIN 8
+#define LEFT_WHISKER 1
+#define RIGHT_WHISKER 0
 
 #define RX_PIN 11//31//11
 #define TX_PIN 10//30//10
@@ -14,7 +23,7 @@ int main()
                       //if the default uart pins are not b nused, this isn't needed
                       
   startComs(RX_PIN, TX_PIN, BAUD, 1000); //this will go to the bluetooth module eventually
-  
+  startSensor(PING_PIN, LEFT_WHISKER, RIGHT_WHISKER);
   
   int n = 0;
   while(1)                                    
@@ -22,7 +31,7 @@ int main()
     int command = rxCommand();
     switch(command) //wait for a control byte
     {
-      case 'a':
+      case 'e':
         txInt32(n); //sending incrementing numbers
         n+=10000; 
         break;
@@ -35,6 +44,38 @@ int main()
         txInt32(42);
         break;
         
+      case 'z':
+        startWander();
+        break;
+        
+      case 'x':
+        stopWander();
+        break;
+        
+      case 'f':
+        print("p %d\tpc %d\tpi %d\twl %d\twr %d\ttl %d\ttr %d\n",getPing(), getPingcm(), getPingin(), getWhiskerL(), getWhiskerR(), getTicksL(), getTicksR());
+        break;
+        
+      case 'q':
+        drive_speed(0,0);
+        break;
+        
+      case 'w':
+        drive_speed(20,20);
+        break;
+      
+      case 'a':
+        drive_speed(-20,20);
+        break;
+        
+      case 's':
+        drive_speed(-20,-20);
+        break;
+        
+      case 'd':
+        drive_speed(20,-20);
+        break;
+        
       case -1:    //case when timed out
         txInt32(314);
         break;
@@ -42,7 +83,7 @@ int main()
       default:    //unknown command
         txInt32(2718);
         txInt32(command);
-        print(command);
+        //print(command);
         print("\n%d\n",command);
     }        
     
