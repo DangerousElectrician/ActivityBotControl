@@ -1,8 +1,8 @@
 Roboproj.c
--I ./../../ActivityBotControl/libraries/libserialcom
--L ./../../ActivityBotControl/libraries/libserialcom
--I ./../../ActivityBotControl/libraries/libwander/libwander
--L ./../../ActivityBotControl/libraries/libwander/libwander
+-I ./../libraries/libwander
+-L ./../libraries/libwander
+-I ./../libraries/libserialcom
+-L ./../libraries/libserialcom
 >compiler=C
 >memtype=cmm main ram compact
 >optimize=-Os
@@ -10,5 +10,5 @@ Roboproj.c
 >-Wall
 >-fno-exceptions
 >defs::-std=c99
->linker::-lserialcom -lwander
+>linker::-lwander -lserialcom
 >BOARD::GENERIC

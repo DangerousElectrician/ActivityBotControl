@@ -1,5 +1,7 @@
 //AUTONOMOUS ROBOT MAPPING WIRELESS NAVIGATIONATORY ROBOLICIUOS COMPUTATION WONDER-GRAM.
 //
+#include "wander.h"
+#include "serialcom.h"
 
 //Program to control the friken robot to do friken robot stuff. i.e
 // wander autonomously and beam data back to the computer when requested.
