@@ -25,6 +25,8 @@ int main()
   startComs(RX_PIN, TX_PIN, BAUD, 1000); //this will go to the bluetooth module eventually
   startSensor(PING_PIN, LEFT_WHISKER, RIGHT_WHISKER);
   
+  int speed = 20;
+  
   int n = 0;
   while(1)                                    
   {
@@ -50,6 +52,7 @@ int main()
         
       case 'x':
         stopWander();
+        drive_speed(0,0);
         break;
         
       case 'f':
@@ -61,19 +64,23 @@ int main()
         break;
         
       case 'w':
-        drive_speed(20,20);
+        drive_speed(speed,speed);
         break;
       
       case 'a':
-        drive_speed(-20,20);
+        drive_speed(-speed,speed);
         break;
         
       case 's':
-        drive_speed(-20,-20);
+        drive_speed(-speed,-speed);
         break;
         
       case 'd':
-        drive_speed(20,-20);
+        drive_speed(speed,-speed);
+        break;
+        
+      case 't':
+        if (speed>50) speed =20; else speed =70;
         break;
         
       case -1:    //case when timed out
