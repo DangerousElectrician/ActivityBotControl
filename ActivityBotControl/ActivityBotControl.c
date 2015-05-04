@@ -59,6 +59,14 @@ int main()
         print("p %d\tpc %d\tpi %d\twl %d\twr %d\ttl %d\ttr %d\n",getPing(), getPingcm(), getPingin(), getWhiskerL(), getWhiskerR(), getTicksL(), getTicksR());
         break;
         
+      case 'v':
+        txInt32(getTicksL());        
+        txInt32(getTicksR());        
+        txInt32(getPing());        
+        txInt32(getWhiskerL());        
+        txInt32(getWhiskerR());
+        break;
+        
       case 'q':
         drive_speed(0,0);
         break;
