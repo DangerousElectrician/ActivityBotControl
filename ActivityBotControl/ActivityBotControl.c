@@ -14,8 +14,7 @@
 
 #define RX_PIN 11//31//11
 #define TX_PIN 10//30//10
-#define BAUD 9600
-
+#define BAUD 9600   
 
 int main()
 {
