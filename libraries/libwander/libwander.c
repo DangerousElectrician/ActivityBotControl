@@ -5,5 +5,5 @@
 #include "wander.h"
 int main()
 {
-  wander();
+  startWander();
 }

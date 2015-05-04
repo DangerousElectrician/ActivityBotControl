@@ -1,6 +1,8 @@
 libwander.c
 wander.h
 wander.c
+-I ./../libsensor
+-L ./../libsensor
 >compiler=C
 >memtype=cmm main ram compact
 >optimize=-Os
@@ -9,4 +11,5 @@ wander.c
 >-fno-exceptions
 >defs::-std=c99
 >-create_library
+>linker::-lsensor
 >BOARD::GENERIC

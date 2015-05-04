@@ -1,9 +1,9 @@
 #include "wander.h"
 
+
 #define TurnK 35 
 
-static int pos;
-static int leftEncoder, rightEncoder;
+static int *cog;
 
 void wander()
 {
@@ -18,8 +18,7 @@ void wander()
         drive_speed(0,0);                  //stop
         pause(25);
       
-        pos = ping(8); //update sensor values simultaneously enough.
-        drive_getTicks(&leftEncoder,&rightEncoder);
+        int pos = getPingcm(); //update sensor values simultaneously enough.
       
         if (pos > max_distance)            //initial scan
         {
@@ -32,17 +31,13 @@ void wander()
    
 }
 
-int getPing()
+int *startWander()
 {
-  return pos;
-}
+  cog = cog_run(&wander, 100);
+  return cog;
+}  
 
-int getLeftTicks()
+void stopWander()
 {
-  return leftEncoder;
-}
-
-int getRightTicks()
-{
-  return rightEncoder;
-}    
+  cog_end(cog);
+}  
