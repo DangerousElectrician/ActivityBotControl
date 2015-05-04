@@ -1,4 +1,4 @@
-
+//libraries
 #include "fdserial.h"
 #include "abdrive.h"
 #include "simpletools.h"
@@ -7,28 +7,28 @@
 #include "serialcom.h"
 #include "sensor.h"
 #include "wander.h"
-
 #define PING_PIN 8
 #define LEFT_WHISKER 1
 #define RIGHT_WHISKER 0
 
-#define RX_PIN 11//31//11
-#define TX_PIN 10//30//10
+#define RX_PIN 11   //31 serial //11 bluetooth
+#define TX_PIN 10   //30 serial //10 bluetooth
 #define BAUD 9600
 
 
 int main()
 {
   //simpleterm_close(); //close default terminal, I want to use those pins
-                      //if the default uart pins are not b nused, this isn't needed
+                      //if the default uart (Universal Asynchronous Recieve and Transmitting
+                      // pins are not being used, this isn't needed
                       
   startComs(RX_PIN, TX_PIN, BAUD, 1000); //this will go to the bluetooth module eventually
   startSensor(PING_PIN, LEFT_WHISKER, RIGHT_WHISKER);
   
-  int speed = 20;
+  int speed = 20; //intial speed 20 ticks/s
   
   int n = 0;
-  while(1)                                    
+  while(1)       //repeat until power loss                             
   {
     int command = rxCommand();
     switch(command) //wait for a control byte
@@ -42,23 +42,23 @@ int main()
         txInt32(rxInt32()*2); //double received number
         break;  
       
-      case '?':
+      case '?': //send 42
         txInt32(42);
         break;
         
-      case 'z':
+      case 'z': //run function "startWander"
         startWander();
         break;
         
-      case 'x':
+      case 'x': //run function "stopWander"
         stopWander();
         drive_speed(0,0);
         break;
         
-      case 'f':
+      case 'f': //send sensor data
         print("p %d\tpc %d\tpi %d\twl %d\twr %d\ttl %d\ttr %d\n",getPing(), getPingcm(), getPingin(), getWhiskerL(), getWhiskerR(), getTicksL(), getTicksR());
         break;
-        
+     
       case 'v':
         txInt32(getTicksL());        
         txInt32(getTicksR());        
@@ -67,35 +67,35 @@ int main()
         txInt32(getWhiskerR());
         break;
         
-      case 'h':
+      case 'h': //recieve drive speed from computer
         drive_speed(rxInt32(),rxInt32());
         break;
-        
-      case 'q':
+     
+      case 'q': //stop movement
         drive_speed(0,0);
         break;
         
-      case 'w':
+      case 'w': //move forward
         drive_speed(speed,speed);
         break;
       
-      case 'a':
+      case 'a': //pivot left
         drive_speed(-speed,speed);
         break;
         
-      case 's':
+      case 's': //move backward
         drive_speed(-speed,-speed);
         break;
         
-      case 'd':
+      case 'd': //pivot right
         drive_speed(speed,-speed);
         break;
-        
-      case 't':
-        if (speed>50) speed =20; else speed =70;
+      
+      case 't': //toggle turbo mode up to 70 ticks/s
+        if (speed>50) speed = 20; else speed =70;
         break;
         
-      case 'j':
+      case 'j': //computer input for rotation
         drive_goto(rxInt32(),rxInt32());
         break;  
         
