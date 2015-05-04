@@ -1,15 +1,22 @@
 
 #include "sensor.h"
 
+static int *cog;
+
 static volatile int ping_Pin, leftWhisker_Pin, rightWhisker_Pin;
 static volatile int lTicks, rTicks, pinguS, lWhisker, rWhisker;
 
-void startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin)
+int *startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin)
 {
   ping_Pin=pingPin;
   leftWhisker_Pin=leftWhiskerPin;
   rightWhisker_Pin=rightWhiskerPin;
-  cog_run( &sensorUpdater,100);
+  cog = cog_run( &sensorUpdater,100);
+}  
+
+void stopSensor()
+{
+  cog_end(cog);
 }  
 
 void sensorUpdater()

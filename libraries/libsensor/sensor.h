@@ -17,6 +17,8 @@ int getWhiskerL();
 
 int getWhiskerR();
 
-void startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin);
+int *startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin);
+
+void stopSensor();
 
 void sensorUpdater();
