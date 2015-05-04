@@ -76,6 +76,10 @@ int main()
         drive_speed(20,-20);
         break;
         
+      case 'j':
+        drive_goto(rxInt32(),rxInt32());
+        break;  
+        
       case -1:    //case when timed out
         txInt32(314);
         break;
