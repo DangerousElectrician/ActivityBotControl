@@ -9,8 +9,8 @@
 #include "wander.h"
 //define pins of sensors
 #define PING_PIN 8
-#define LEFT_WHISKER 1
-#define RIGHT_WHISKER 0
+#define LEFT_WHISKER 0
+#define RIGHT_WHISKER 1
 
 #define RX_PIN 11   //31 serial //11 bluetooth
 #define TX_PIN 10   //30 serial //10 bluetooth
