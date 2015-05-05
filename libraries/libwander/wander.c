@@ -3,7 +3,7 @@
 
 #define TurnK 35 
 
-static int *cog;
+static int *cog =0;
 
 int spin2find() //spins to find furthest distance
 {
@@ -84,11 +84,12 @@ void wander()
 
 int *startWander()
 {
-  cog = cog_run(&wander, 100);
+  if (cog ==0) cog = cog_run(&wander, 100); //make sure multiple instances of wander don't run
   return cog;
 }  
 
 void stopWander()
 {
   cog_end(cog);
+  cog =0;
 }  
