@@ -3,7 +3,7 @@ import serialComs
 class robotControl:
 
 	def __init__(self, port, baudrate, timeout):
-		self.com = serialComs.serialComs('COM6', 9600, timeout=4)
+		self.com = serialComs.serialComs(port, baudrate, timeout)
 
 	def updateSensors(self):		
 		self.ticks = [0,0]
