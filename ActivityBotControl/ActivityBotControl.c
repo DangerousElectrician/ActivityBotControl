@@ -24,7 +24,7 @@ int main()
                       // pins are not being used, this isn't needed
                       
   startComs(RX_PIN, TX_PIN, BAUD, 1000); //this will go to the bluetooth module eventually
-  startSensor(PING_PIN, LEFT_WHISKER, RIGHT_WHISKER);
+//  startSensor(PING_PIN, LEFT_WHISKER, RIGHT_WHISKER);
   
   int speed = 20; //intial speed 20 ticks/s
   
@@ -47,6 +47,10 @@ int main()
         txInt32(42);
         break;
         
+      case '0':
+        startSensor(PING_PIN, LEFT_WHISKER, RIGHT_WHISKER);
+        break;
+
       case 'z': //run function "startWander"
         startWander();
         break;
