@@ -10,10 +10,10 @@ int *startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin)
 {
   if(!cog)
   {
-  ping_Pin=pingPin;
-  leftWhisker_Pin=leftWhiskerPin;
-  rightWhisker_Pin=rightWhiskerPin;
-  cog = cog_run( &sensorUpdater,100);
+    ping_Pin=pingPin;
+    leftWhisker_Pin=leftWhiskerPin;
+    rightWhisker_Pin=rightWhiskerPin;
+    cog = cog_run( &sensorUpdater,100);
   }
 }  
 
