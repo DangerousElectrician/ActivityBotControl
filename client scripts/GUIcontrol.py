@@ -5,7 +5,7 @@ import numpy as np
 from pylab import *
 
 top = tkinter.Tk()
-rob = robotControl.robotControl('/dev/rfcomm0', 9600, timeout=4)
+rob = robotControl.robotControl('COM6', 9600, timeout=4)
 
 ticks = [0,0]
 whisker = [0,0]

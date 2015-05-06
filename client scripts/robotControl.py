@@ -5,7 +5,8 @@ class robotControl:
 	def __init__(self, port, baudrate, timeout):
 		self.com = serialComs.serialComs(port, baudrate, timeout)
 
-	def updateSensors(self):		
+	def updateSensors(self):
+		self.com.write(b'0')		
 		self.ticks = [0,0]
 		self.whisker = [0,0]
 		self.com.write(b'v')
