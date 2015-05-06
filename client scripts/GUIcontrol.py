@@ -1,11 +1,11 @@
 import tkinter
 import robotControl
 import math
-#import numpy as np
-#import matplotlib as plt
+import numpy as np
+from pylab import *
 
 top = tkinter.Tk()
-rob = robotControl.robotControl('COM6', 9600, timeout=4)
+rob = robotControl.robotControl('/dev/rfcomm0', 9600, timeout=4)
 
 ticks = [0,0]
 whisker = [0,0]
@@ -21,21 +21,28 @@ def readSensors():
 	top.after(1,readSensors)
 
 def startMotor():
-	rob.driveSpeed(-15,15)
+	rob.driveSpeed(-5,5)
 
 def stopMotor():
 	rob.driveSpeed(0,0)
 	
-r = []
+ra= []
 th = []
 def printData():
 	startMotor()
 	print(str(math.degrees(rob.getTheta()))+"\t"+str(rob.getPing()))
-	r.append(rob.getPing())
+	ra.append(rob.getPing())
 	th.append(rob.getTheta())
 	if(rob.getTheta()>2*math.pi):
 		stopMotor()
-		print(r,th)
+		print(ra,th)
+		
+		r= np.array(ra)
+		theta = np.array(th)
+
+		ax = subplot(111, polar=True)
+		c = scatter(theta, r)
+		plt.show()
 	else:
 		top.after(1,printData)
 	
