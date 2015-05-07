@@ -54,6 +54,14 @@ int main()
       case '-':
         stopSensor();
         break;
+        
+      case '8':
+        drive_open();
+        break;
+        
+      case '9':
+        drive_close();
+        break;
 
       case 'z': //run function "startWander"
         startWander();
