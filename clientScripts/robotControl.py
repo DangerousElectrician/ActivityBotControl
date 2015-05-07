@@ -5,8 +5,10 @@ class robotControl:
 	def __init__(self, port, baudrate, timeout):
 		self.com = serialComs.serialComs(port, baudrate, timeout)
 
-	def updateSensors(self):
-		self.com.write(b'0')		
+	def reset(self):
+		self.com.write(b'p')
+		
+	def updateSensors(self):	
 		self.ticks = [0,0]
 		self.whisker = [0,0]
 		self.com.write(b'v')
@@ -17,6 +19,18 @@ class robotControl:
 		self.whisker[0] = self.com.readInt32()
 		self.whisker[1] = self.com.readInt32()
 		
+	def startSensors(self):
+		self.com.write(b'0')
+		
+	def stopSensors(self):
+		self.com.write(b'-')
+		
+	def startDrive(self):
+		self.com.write(b'8')
+		
+	def stopDrive(self):
+		self.com.write(b'9')		
+		
 	def getWhisker(self):
 		return self.whisker
 		
@@ -25,6 +39,9 @@ class robotControl:
 		
 	def getPing(self):
 		return self.ping
+	
+	def getPingcm(self):
+		return self.ping/58
 	
 	def getTheta(self):
 		return 0.03071833648393195*(self.ticks[1]-self.ticks[0]) # magic number
