@@ -19,6 +19,7 @@ def off():
 	
 def startPlot():
 	plotData(rob.getTheta())
+	rob.driveSpeed(-5,5)
 
 def readSensors():
 	rob.updateSensors()
@@ -27,13 +28,12 @@ def readSensors():
 ra= []
 th = []
 def plotData(initth):
-	rob.driveSpeed(-5,5)
-	print(str(math.degrees(rob.getTheta()))+"\t"+str(rob.getPing()))
+	#print(str(math.degrees(rob.getTheta()))+"\t"+str(rob.getPing()))
 	ra.append(rob.getPingcm())
 	th.append(rob.getTheta())
 	if((rob.getTheta()-initth)>2*math.pi):
 		rob.driveSpeed(0,0)
-		print(ra,th)
+		#print(ra,th)
 		
 		r= np.array(ra)
 		theta = np.array(th)
