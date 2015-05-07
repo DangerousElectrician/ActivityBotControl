@@ -1,3 +1,4 @@
+import sys
 import tkinter
 import robotControl
 import math
@@ -5,7 +6,7 @@ import numpy as np
 from pylab import *
 
 top = tkinter.Tk()
-rob = robotControl.robotControl('COM6', 9600, timeout=4)
+rob = robotControl.robotControl(sys.argv[1], 9600, timeout=4)
 
 ticks = [0,0]
 whisker = [0,0]
