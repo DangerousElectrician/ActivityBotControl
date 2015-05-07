@@ -40,6 +40,9 @@ class robotControl:
 	def getPing(self):
 		return self.ping
 	
+	def getPingcm(self):
+		return self.ping/58
+	
 	def getTheta(self):
 		return 0.03071833648393195*(self.ticks[1]-self.ticks[0]) # magic number
 		

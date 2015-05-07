@@ -29,7 +29,7 @@ th = []
 def plotData(initth):
 	rob.driveSpeed(-5,5)
 	print(str(math.degrees(rob.getTheta()))+"\t"+str(rob.getPing()))
-	ra.append(rob.getPing())
+	ra.append(rob.getPingcm())
 	th.append(rob.getTheta())
 	if((rob.getTheta()-initth)>2*math.pi):
 		rob.driveSpeed(0,0)
@@ -83,6 +83,8 @@ def main():
 	frame.bind("<KeyPress-s>", gobackward)
 	frame.bind("<KeyRelease-d>", stopright)
 	frame.bind("<KeyPress-d>", goright)
+	frame.focus_set()
+
 	frame.pack()
 	
 	Binit.pack()
