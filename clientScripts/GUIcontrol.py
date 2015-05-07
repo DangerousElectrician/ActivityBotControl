@@ -44,14 +44,49 @@ def plotData(initth):
 	else:
 		top.after(1,lambda:plotData(initth))
 	
+
+	
 def main():
-	B = tkinter.Button(top, text ="init", command = init)
+	Binit = tkinter.Button(top, text ="init", command = init)
 	B3 = tkinter.Button(top, text ="scan", command = startPlot)
-	B2 = tkinter.Button(top, text ="off", command = off)
+	Boff = tkinter.Button(top, text ="off", command = off)
 	Breset = tkinter.Button(top, text ="reset", command = rob.reset)
 
-	B.pack()
-	B2.pack()
+		
+	speed = 15
+	def goforward(e):
+		rob.driveSpeed(speed,speed)	
+	def stopforward(e):
+		rob.driveSpeed(0,0)
+		
+	def gobackward(e):
+		rob.driveSpeed(-speed,-speed)	
+	def stopbackward(e):
+		rob.driveSpeed(0,0)
+		
+	def goleft(e):
+		rob.driveSpeed(-speed,speed)	
+	def stopleft(e):
+		rob.driveSpeed(0,0)
+		
+	def goright(e):
+		rob.driveSpeed(speed,-speed)	
+	def stopright(e):
+		rob.driveSpeed(0,0)
+	
+	frame = tkinter.Frame(top, width=100, height=100)
+	frame.bind("<KeyRelease-w>", stopforward)
+	frame.bind("<KeyPress-w>", goforward)
+	frame.bind("<KeyRelease-a>", stopleft)
+	frame.bind("<KeyPress-a>", goleft)
+	frame.bind("<KeyRelease-s>", stopbackward)
+	frame.bind("<KeyPress-s>", gobackward)
+	frame.bind("<KeyRelease-d>", stopright)
+	frame.bind("<KeyPress-d>", goright)
+	frame.pack()
+	
+	Binit.pack()
+	Boff.pack()
 	B3.pack()
 	Breset.pack()
 	top.after(1,readSensors)
