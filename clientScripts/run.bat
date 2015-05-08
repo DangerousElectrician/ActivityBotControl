@@ -1,0 +1,1 @@
+python GUIcontrol.py COM6

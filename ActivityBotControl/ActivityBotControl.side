@@ -12,5 +12,6 @@ ActivityBotControl.c
 >-Wall
 >-fno-exceptions
 >defs::-std=c99
+>-lm
 >linker::-lserialcom -lsensor -lwander
 >BOARD::ACTIVITYBOARD
