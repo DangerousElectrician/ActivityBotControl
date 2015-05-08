@@ -6,7 +6,7 @@ import numpy as np
 from pylab import *
 
 top = tkinter.Tk()
-rob = robotControl.robotControl(sys.argv[1], 9600, timeout=4)
+rob = robotControl.robotControl(sys.argv[1], 9600, timeout=1)
 
 def init():
 	rob.startSensors()
