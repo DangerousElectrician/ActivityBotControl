@@ -49,7 +49,7 @@ void sensorUpdater()
     rTicks = rt;
     
     
-    dth = ((rt-prt) -(lt-plt))/32.8; //32.3077 is the axel length in ticks
+    dth = ((rt-prt) -(lt-plt))/33; //32.3077 is the axel length in ticks
     ds  = ((rt-prt) +(lt-plt))/2.0; //distance travelled
     
     dx= ds * cos(th + dth/2.0);
