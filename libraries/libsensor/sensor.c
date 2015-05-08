@@ -5,6 +5,7 @@ static int *cog=0;
 
 static volatile int ping_Pin, leftWhisker_Pin, rightWhisker_Pin;
 static volatile int lTicks, rTicks, pinguS, lWhisker, rWhisker;
+static volatile float x,y,th;
 
 int *startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin)
 {
@@ -25,16 +26,40 @@ void stopSensor()
 
 void sensorUpdater()
 {
+  int rt=0, lt=0;
+  float prt, plt;
+  th =0;
+  float dth,ds,dx,dy;
+  x=0; y=0;
+  
   while(1)
   {
     pinguS = ping(ping_Pin);
     lWhisker = input(leftWhisker_Pin);
     rWhisker = input(rightWhisker_Pin);
     
-    int rt, lt;
+    prt = rt;
+    plt = lt;
+    
     drive_getTicks(&lt, &rt);
     lTicks = lt;
     rTicks = rt;
+    
+    
+    dth = ((rt-prt) -(lt-plt))/32.8; //32.3077 is the axel length in ticks
+    ds  = ((rt-prt) +(lt-plt))/2.0; //distance travelled
+    
+    dx= ds * cos(th + dth/2.0);
+    dy= ds * sin(th + dth/2.0);
+    th += dth;
+    
+    /*
+    if (th>2.0*PI) th-=2.0*PI;
+    if (th<-2.0*PI) th+=2.0*PI;
+    */
+    
+    x+=dx;
+    y+=dy;
     
     pause(10);
   }    
@@ -77,3 +102,50 @@ int getWhiskerR()
 {
   return rWhisker;
 }
+
+float getXpos()
+{
+  return x;
+}
+
+float getYpos()
+{
+  return y;
+}  
+
+float getThrad()
+{
+  return th;
+}
+
+int getXint()
+{
+  return (int)x;
+}
+
+int getYint()
+{
+  return (int)y;
+}
+
+int getThint()
+{
+  return (int)th;
+}
+
+float getXcm()
+{
+  return x/3.25;
+}
+
+float getYcm()
+{
+  return y/3.25;
+}
+
+float getThdeg()
+{
+  return (th/(2.0*PI)) * 360.0;
+}
+  
+        

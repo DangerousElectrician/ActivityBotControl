@@ -50,18 +50,6 @@ int main()
       case '0':
         startSensor(PING_PIN, LEFT_WHISKER, RIGHT_WHISKER);
         break;
-        
-      case '-':
-        stopSensor();
-        break;
-        
-      case '8':
-        drive_open();
-        break;
-        
-      case '9':
-        drive_close();
-        break;
 
       case 'z': //run function "startWander"
         startWander();
@@ -119,6 +107,18 @@ int main()
       case 'j': //computer input for rotation
         drive_goto(rxInt32(),rxInt32());
         break;  
+        
+      case 'i': // print 
+        print("X = %.2f, Y = %.2f, Th = %.1f\n", (double) getXcm(), (double) getYcm(), (double) getThdeg());
+        break;
+        
+      case 'k': //kalibrate
+        while(getThdeg()<360)
+        {
+          drive_speed(-speed,speed);
+        }
+        drive_speed(0,0);
+        break;          
         
       case -1:    //case when timed out
         txInt32(314);

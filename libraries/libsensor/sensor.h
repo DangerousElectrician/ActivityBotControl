@@ -3,6 +3,7 @@
 #include "abdrive.h"
 #include "ping.h"
 
+
 int getPing();
 
 int getPingcm();
@@ -22,3 +23,24 @@ int *startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin);
 void stopSensor();
 
 void sensorUpdater();
+
+
+float getXpos();
+
+float getYpos();
+
+float getTh();
+
+
+int getXint();
+
+int getYint();
+
+int getThint();
+
+
+float getXcm();
+
+float getYcm();
+
+float getThdeg();
