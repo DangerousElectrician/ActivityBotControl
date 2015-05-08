@@ -29,11 +29,13 @@ def update_line(hl, new_datax, new_datay):
 	draw()
 
 	
-stopScan = False
+global stopScan
+stopscan = False
 def startPlot():
 	ion()
 	show()
 	#rob.driveSpeed(-5,5)
+	global stopScan
 	stopScan = False
 	plotData(rob.getTheta())
 
@@ -44,7 +46,8 @@ def plotData(initth):
 	#print(str(math.degrees(rob.getTheta()))+"\t"+str(rob.getPing()))
 	#ra.append(rob.getPingcm())
 	#th.append(rob.getTheta())
-	update_line(h, rob.getPingcm()*cos(rob.getTheta()), rob.getPingcm()*sin(rob.getTheta()))
+	print(rob.getPos()[0])
+	update_line(h, rob.getPingcm()*cos(rob.getTheta())+(rob.getPos()[0])/3.25, rob.getPingcm()*sin(rob.getTheta())+(rob.getPos()[1])/3.25)
 	if(stopScan):#(rob.getTheta()-initth)>2*math.pi):
 		rob.driveSpeed(0,0)
 		#print(ra,th)
@@ -59,36 +62,54 @@ def plotData(initth):
 		top.after(1,lambda:plotData(initth))
 	
 def stopScn():
-	stopScan = True
+	global stopScan
+	stopScan= True
 	
 def main():
 	Binit = tkinter.Button(top, text ="init", command = init)
-	B3 = tkinter.Button(top, text ="scan", command = startPlot)
-	B3 = tkinter.Button(top, text ="stop scan", command = stopScn)
+	Bscan = tkinter.Button(top, text ="scan", command = startPlot)
+	Bsscan = tkinter.Button(top, text ="stop scan", command = stopScn)
 	Boff = tkinter.Button(top, text ="off", command = off)
 	Breset = tkinter.Button(top, text ="reset", command = rob.reset)
 
 		
 	speed = 15
+	direcOn = [False,False,False,False]
 	def goforward(e):
-		rob.driveSpeed(speed,speed)	
+		if(not direcOn[0]):
+			rob.driveSpeed(speed,speed)
+			direcOn[0]=True
 	def stopforward(e):
-		rob.driveSpeed(0,0)
+		if(not (direcOn[1] or direcOn[2] or direcOn[3])):
+			rob.driveSpeed(0,0)
+		direcOn[0]=False
 		
 	def gobackward(e):
-		rob.driveSpeed(-speed,-speed)	
+		if(not direcOn[1]):
+			rob.driveSpeed(-speed,-speed)	
+			direcOn[1]=True
 	def stopbackward(e):
-		rob.driveSpeed(0,0)
+		if(not (direcOn[0] or direcOn[2] or direcOn[3])):
+			rob.driveSpeed(0,0)
+		direcOn[1]=False
 		
 	def goleft(e):
-		rob.driveSpeed(-speed,speed)	
+		if(not direcOn[2]):
+			rob.driveSpeed(-speed,speed)	
+			direcOn[2]=True
 	def stopleft(e):
-		rob.driveSpeed(0,0)
+		if(not (direcOn[1] or direcOn[0] or direcOn[3])):
+			rob.driveSpeed(0,0)
+		direcOn[2]=False
 		
 	def goright(e):
-		rob.driveSpeed(speed,-speed)	
+		if(not direcOn[3]):
+			rob.driveSpeed(speed,-speed)	
+			direcOn[3]=True
 	def stopright(e):
-		rob.driveSpeed(0,0)
+		if(not (direcOn[1] or direcOn[2] or direcOn[0])):
+			rob.driveSpeed(0,0)
+		direcOn[3]=False
 	
 	frame = tkinter.Frame(top, width=100, height=100)
 	frame.bind("<KeyRelease-w>", stopforward)
@@ -105,7 +126,8 @@ def main():
 	
 	Binit.pack()
 	Boff.pack()
-	B3.pack()
+	Bscan.pack()
+	Bsscan.pack()
 	Breset.pack()
 	top.after(1,readSensors)
 	top.mainloop()
