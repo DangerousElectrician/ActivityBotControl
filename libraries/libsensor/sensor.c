@@ -56,8 +56,8 @@ void sensorUpdater()
     dy= ds * sin(th + dth/2.0);
     th += dth;
     
-    if (th>2.0*PI) th-=2.0*PI;
-    if (th<=0) th+=2.0*PI;
+    if (th>=2.0*PI) th-=2.0*PI;
+    if (th<0) th+=2.0*PI;
     
     x+=dx;
     y+=dy;
