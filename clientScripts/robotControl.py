@@ -12,7 +12,7 @@ class robotControl:
 		self.com.write(b'p')
 		
 	def updateSensors(self):	
-		self.com.write(b'v')
+		self.com.write([131])
 		self.com.flushInput()
 		
 		self.pos[0], = self.com.readFloat()
@@ -55,6 +55,6 @@ class robotControl:
 		return 0.03071833648393195*(self.ticks[1]-self.ticks[0]) # magic number
 		
 	def driveSpeed(self,l,r):
-		self.com.write(b'h')
+		self.com.write([132])
 		self.com.writeInt32(l)
 		self.com.writeInt32(r)
