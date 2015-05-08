@@ -1,4 +1,5 @@
 import serial
+import struct
 
 class serialComs():
 
@@ -13,6 +14,9 @@ class serialComs():
 		
 	def readInt32(self):
 		return int.from_bytes(self.ser.read(4), byteorder='little',signed=True)
+		
+	def readFloat(self):
+		return struct.unpack('f', self.ser.read(4))
 		
 	def flushInput(self):
 		self.ser.flushInput()
