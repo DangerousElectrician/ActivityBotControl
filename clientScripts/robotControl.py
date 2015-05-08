@@ -4,15 +4,20 @@ class robotControl:
 
 	def __init__(self, port, baudrate, timeout):
 		self.com = serialComs.serialComs(port, baudrate, timeout)
+		self.ticks = [0,0]
+		self.whisker = [0,0]
+		self.pos = [0,0,0]
 
 	def reset(self):
 		self.com.write(b'p')
 		
 	def updateSensors(self):	
-		self.ticks = [0,0]
-		self.whisker = [0,0]
 		self.com.write(b'v')
 		self.com.flushInput()
+		
+		self.pos[0], = self.com.readFloat()
+		self.pos[1], = self.com.readFloat()
+		self.pos[2], = self.com.readFloat()
 		self.ticks[0] = self.com.readInt32()
 		self.ticks[1] = self.com.readInt32()
 		self.ping = self.com.readInt32()
@@ -36,6 +41,9 @@ class robotControl:
 		
 	def getTicks(self):
 		return self.ticks
+		
+	def getPos(self):
+		return self.pos
 		
 	def getPing(self):
 		return self.ping
