@@ -50,6 +50,18 @@ int main()
       case '0':
         startSensor(PING_PIN, LEFT_WHISKER, RIGHT_WHISKER);
         break;
+        
+      case 128:
+        stopSensor();
+        break;
+        
+      case 129:
+        drive_open();
+        break;
+        
+      case 130:
+        drive_close();
+        break;
 
       case 'z': //run function "startWander"
         startWander();

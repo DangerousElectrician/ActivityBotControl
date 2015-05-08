@@ -23,13 +23,13 @@ class robotControl:
 		self.com.write(b'0')
 		
 	def stopSensors(self):
-		self.com.write(b'-')
+		self.com.write(128)
 		
 	def startDrive(self):
-		self.com.write(b'8')
+		self.com.write(129)
 		
 	def stopDrive(self):
-		self.com.write(b'9')		
+		self.com.write(130)		
 		
 	def getWhisker(self):
 		return self.whisker
