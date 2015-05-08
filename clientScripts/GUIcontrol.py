@@ -16,14 +16,24 @@ def off():
 	rob.stopSensors()
 	rob.stopDrive()
 
-	
-def startPlot():
-	plotData(rob.getTheta())
-	rob.driveSpeed(-5,5)
-
 def readSensors():
 	rob.updateSensors()
 	top.after(1,readSensors)
+	
+ion()
+h, = plot([], [], 'bo')
+def update_line(hl, new_datax, new_datay):
+	hl.set_xdata(np.append(hl.get_xdata(), new_datax))
+	hl.set_ydata(np.append(hl.get_ydata(), new_datay))
+	gca().relim()
+	gca().autoscale_view()
+	draw()
+
+	
+def startPlot():
+	rob.driveSpeed(-5,5)
+	plotData(rob.getTheta())
+
 	
 ra= []
 th = []
@@ -31,6 +41,7 @@ def plotData(initth):
 	#print(str(math.degrees(rob.getTheta()))+"\t"+str(rob.getPing()))
 	ra.append(rob.getPingcm())
 	th.append(rob.getTheta())
+	update_line(h, rob.getPingcm()*cos(rob.getTheta()), rob.getPingcm()*sin(rob.getTheta()))
 	if((rob.getTheta()-initth)>2*math.pi):
 		rob.driveSpeed(0,0)
 		#print(ra,th)
