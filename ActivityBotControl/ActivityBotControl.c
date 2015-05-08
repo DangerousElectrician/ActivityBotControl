@@ -77,7 +77,7 @@ int main()
         print("p %d\tpc %d\tpi %d\twl %d\twr %d\ttl %d\ttr %d\n",getPing(), getPingcm(), getPingin(), getWhiskerL(), getWhiskerR(), getTicksL(), getTicksR());
         break;
      
-      case 'v':
+      case 131:
         txFloat(getXpos());
         txFloat(getYpos());
         txFloat(getThrad());
@@ -88,7 +88,7 @@ int main()
         txInt32(getWhiskerR());
         break;
         
-      case 'h': //recieve drive speed from computer
+      case 132: //recieve drive speed from computer
         drive_speed(rxInt32(),rxInt32());
         break;
      
@@ -119,10 +119,6 @@ int main()
       case 't': //toggle turbo mode up to 70 ticks/s
         if (speed>50) speed = 20; else speed =70;
         break;
-        
-      case 'j': //computer input for rotation
-        drive_goto(rxInt32(),rxInt32());
-        break;  
         
       case 'i': // print 
         print("X = %.2f, Y = %.2f, Th = %.1f\n", (double) getXcm(), (double) getYcm(), (double) getThdeg());
