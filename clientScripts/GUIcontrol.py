@@ -20,7 +20,6 @@ def readSensors():
 	rob.updateSensors()
 	top.after(1,readSensors)
 	
-ion()
 h, = plot([], [], 'bo')
 def update_line(hl, new_datax, new_datay):
 	hl.set_xdata(np.append(hl.get_xdata(), new_datax))
@@ -31,27 +30,29 @@ def update_line(hl, new_datax, new_datay):
 
 	
 def startPlot():
+	ion()
+	show()
 	rob.driveSpeed(-5,5)
 	plotData(rob.getTheta())
 
 	
-ra= []
-th = []
+#ra= []
+#th = []
 def plotData(initth):
 	#print(str(math.degrees(rob.getTheta()))+"\t"+str(rob.getPing()))
-	ra.append(rob.getPingcm())
-	th.append(rob.getTheta())
+	#ra.append(rob.getPingcm())
+	#th.append(rob.getTheta())
 	update_line(h, rob.getPingcm()*cos(rob.getTheta()), rob.getPingcm()*sin(rob.getTheta()))
 	if((rob.getTheta()-initth)>2*math.pi):
 		rob.driveSpeed(0,0)
 		#print(ra,th)
 		
-		r= np.array(ra)
-		theta = np.array(th)
+		#r= np.array(ra)
+		#theta = np.array(th)
 
-		ax = subplot(111, polar=True)
-		c = scatter(theta, r)
-		plt.show()
+		#ax = subplot(111, polar=True)
+		#c = scatter(theta, r)
+		#plt.show()
 	else:
 		top.after(1,lambda:plotData(initth))
 	
