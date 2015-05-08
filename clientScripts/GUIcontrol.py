@@ -46,7 +46,7 @@ def plotData(initth):
 	#print(str(math.degrees(rob.getTheta()))+"\t"+str(rob.getPing()))
 	#ra.append(rob.getPingcm())
 	#th.append(rob.getTheta())
-	print(rob.getPos()[0])
+	print(rob.getPingcm())
 	update_line(h, rob.getPingcm()*cos(rob.getTheta())+(rob.getPos()[0])/3.25, rob.getPingcm()*sin(rob.getTheta())+(rob.getPos()[1])/3.25)
 	if(stopScan):#(rob.getTheta()-initth)>2*math.pi):
 		rob.driveSpeed(0,0)
