@@ -29,10 +29,12 @@ def update_line(hl, new_datax, new_datay):
 	draw()
 
 	
+stopScan = False
 def startPlot():
 	ion()
 	show()
-	rob.driveSpeed(-5,5)
+	#rob.driveSpeed(-5,5)
+	stopScan = False
 	plotData(rob.getTheta())
 
 	
@@ -43,7 +45,7 @@ def plotData(initth):
 	#ra.append(rob.getPingcm())
 	#th.append(rob.getTheta())
 	update_line(h, rob.getPingcm()*cos(rob.getTheta()), rob.getPingcm()*sin(rob.getTheta()))
-	if((rob.getTheta()-initth)>2*math.pi):
+	if(stopScan):#(rob.getTheta()-initth)>2*math.pi):
 		rob.driveSpeed(0,0)
 		#print(ra,th)
 		
@@ -56,11 +58,13 @@ def plotData(initth):
 	else:
 		top.after(1,lambda:plotData(initth))
 	
-
+def stopScn():
+	stopScan = True
 	
 def main():
 	Binit = tkinter.Button(top, text ="init", command = init)
 	B3 = tkinter.Button(top, text ="scan", command = startPlot)
+	B3 = tkinter.Button(top, text ="stop scan", command = stopScn)
 	Boff = tkinter.Button(top, text ="off", command = off)
 	Breset = tkinter.Button(top, text ="reset", command = rob.reset)
 
