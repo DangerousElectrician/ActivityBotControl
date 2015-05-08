@@ -3,6 +3,7 @@
 #include "abdrive.h"
 #include "simpletools.h"
 #include "ping.h"
+#include "mstimer.h"
 
 #include "serialcom.h"
 #include "sensor.h"
@@ -128,7 +129,7 @@ int main()
         break;
         
       case 'k': //kalibrate
-        while(getThdeg()<360)
+        while(getThdeg()<90)
         {
           drive_speed(-speed,speed);
         }

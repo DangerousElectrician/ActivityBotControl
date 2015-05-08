@@ -1,5 +1,6 @@
 
 #include "sensor.h"
+#include "mstimer.h"
 
 static int *cog=0;
 
@@ -16,6 +17,7 @@ int *startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin)
     rightWhisker_Pin=rightWhiskerPin;
     cog = cog_run( &sensorUpdater,100);
   }
+  return cog;
 }  
 
 void stopSensor()
@@ -31,9 +33,10 @@ void sensorUpdater()
   th =0;
   float dth,ds,dx,dy;
   x=0; y=0;
-  
+  mstime_start();
   while(1)
   {
+    
     pinguS = ping(ping_Pin);
     lWhisker = input(leftWhisker_Pin);
     rWhisker = input(rightWhisker_Pin);
@@ -46,22 +49,20 @@ void sensorUpdater()
     rTicks = rt;
     
     
-    dth = ((rt-prt) -(lt-plt))/32.8; //32.3077 is the axel length in ticks
+    dth = ((rt-prt) -(lt-plt))/33; //32.3077 is the axel length in ticks
     ds  = ((rt-prt) +(lt-plt))/2.0; //distance travelled
     
     dx= ds * cos(th + dth/2.0);
     dy= ds * sin(th + dth/2.0);
     th += dth;
     
-    /*
-    if (th>2.0*PI) th-=2.0*PI;
-    if (th<-2.0*PI) th+=2.0*PI;
-    */
+    if (th>=2.0*PI) th-=2.0*PI;
+    if (th<0) th+=2.0*PI;
     
     x+=dx;
     y+=dy;
     
-    pause(10);
+    while(mstime_get() % 10 != 0);
   }    
 }  
 
