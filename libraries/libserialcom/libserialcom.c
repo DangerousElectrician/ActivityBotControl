@@ -18,6 +18,7 @@ int main()
   while(1)                                    
   {
     int command = rxCommand();
+    char c[4] = {67,66,65,10};
     switch(command) //wait for a control byte
     {
       case 'a':
@@ -31,6 +32,10 @@ int main()
       
       case '?':
         txInt32(42);
+        break;
+        
+      case 'f':
+        txBytes(4,c);
         break;
         
       case -1:    //case when timed out

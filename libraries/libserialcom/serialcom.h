@@ -17,6 +17,10 @@ void startComs(int rxpin, int txpin, int baudrate, int timeout);
  */
 void txInt32(int i);
 
+void txFloat(float f);
+
+void txBytes(int n, char *b);
+
 //void txChar(
 
 /**

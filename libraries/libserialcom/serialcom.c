@@ -18,6 +18,23 @@ void txInt32(int i) //sends in little endian
   }                               //bitshifting before truncate gets 4 bytes with the same bits as the int
 }
 
+void txFloat(float f)
+{
+  char *b = &f;
+  for(int j = 0; j < 4; j++)
+  {
+    writeChar(conn, b[j]);
+  }
+}  
+
+void txBytes(int n, char *b)
+{
+  for(int j = 0; j < n; j++)
+  {
+    writeChar(conn, b[j]);
+  }
+}  
+
 int rxCommand()
 {
   return fdserial_rxTime(conn, tout);
