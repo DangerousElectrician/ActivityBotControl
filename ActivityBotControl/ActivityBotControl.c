@@ -77,6 +77,9 @@ int main()
         break;
      
       case 'v':
+        txFloat(getXpos());
+        txFloat(getYpos());
+        txFloat(getThrad());
         txInt32(getTicksL());        
         txInt32(getTicksR());        
         txInt32(getPing());        
