@@ -1,5 +1,6 @@
 
 #include "sensor.h"
+#include "mstimer.h"
 
 static int *cog=0;
 
@@ -16,6 +17,7 @@ int *startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin)
     rightWhisker_Pin=rightWhiskerPin;
     cog = cog_run( &sensorUpdater,100);
   }
+  return cog;
 }  
 
 void stopSensor()
@@ -31,9 +33,10 @@ void sensorUpdater()
   th =0;
   float dth,ds,dx,dy;
   x=0; y=0;
-  
+  mstime_start();
   while(1)
   {
+    
     pinguS = ping(ping_Pin);
     lWhisker = input(leftWhisker_Pin);
     rWhisker = input(rightWhisker_Pin);
@@ -53,15 +56,13 @@ void sensorUpdater()
     dy= ds * sin(th + dth/2.0);
     th += dth;
     
-    /*
     if (th>2.0*PI) th-=2.0*PI;
-    if (th<-2.0*PI) th+=2.0*PI;
-    */
+    if (th<=0) th+=2.0*PI;
     
     x+=dx;
     y+=dy;
     
-    pause(10);
+    while(mstime_get() % 10 != 0);
   }    
 }  
 
