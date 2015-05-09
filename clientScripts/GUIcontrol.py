@@ -6,7 +6,8 @@ import numpy as np
 from pylab import *
 
 top = tkinter.Tk()
-rob = robotControl.robotControl(sys.argv[1], 9600, timeout=2)
+
+rob = robotControl.robotControl(sys.argv[1], 9600, timeout=4)
 
 def init():
 	rob.startSensors()
@@ -18,7 +19,7 @@ def off():
 
 def readSensors():
 	rob.updateSensors()
-	top.after(1,readSensors)
+	top.after(50,readSensors)
 	
 h, = plot([], [], 'bo')
 def update_line(hl, new_datax, new_datay):
@@ -112,7 +113,7 @@ def main():
 			rob.driveSpeed(0,0)
 		direcOn[3]=False
 	
-	frame = tkinter.Frame(top, width=100, height=100)
+	frame = tkinter.Frame(top, width=200, height=100)
 	frame.bind("<KeyRelease-w>", stopforward)
 	frame.bind("<KeyPress-w>", goforward)
 	frame.bind("<KeyRelease-a>", stopleft)
@@ -130,7 +131,7 @@ def main():
 	Bscan.pack()
 	Bsscan.pack()
 	Breset.pack()
-	top.after(1,readSensors)
+	top.after(10,readSensors)
 	top.mainloop()
 	
 main()

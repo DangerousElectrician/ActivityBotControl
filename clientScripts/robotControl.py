@@ -26,12 +26,16 @@ class robotControl:
 		
 	def startSensors(self):
 		self.com.write(b'0')
+		if (self.com.readInt32() == 42):
+			print ("Sensors initialized\n")
 		
 	def stopSensors(self):
 		self.com.write([128])
 		
 	def startDrive(self):
 		self.com.write([129])
+		if (self.com.readInt32() == 42):
+			print ("Drive System initialized\n")
 		
 	def stopDrive(self):
 		self.com.write([130])		

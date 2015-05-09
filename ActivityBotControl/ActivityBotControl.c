@@ -50,6 +50,7 @@ int main()
         
       case '0':
         startSensor(PING_PIN, LEFT_WHISKER, RIGHT_WHISKER);
+        txInt32(42);
         break;
         
       case 128:
@@ -58,6 +59,7 @@ int main()
         
       case 129:
         drive_open();
+        txInt32(42);
         break;
         
       case 130:
