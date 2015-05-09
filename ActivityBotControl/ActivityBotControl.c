@@ -87,9 +87,9 @@ int main()
         txInt32(getTicksL());        
         txInt32(getTicksR());        
         int pung = getPing();
-        txBytes(2,&pung);        
-        txInt32(getWhiskerL());        
-        txInt32(getWhiskerR());
+        txBytes(2,&pung);       
+        pung =  getWhiskerL()+getWhiskerR()<<2;
+        txBytes(1,&pung);
         break;
         }        
       case 132: //recieve drive speed from computer

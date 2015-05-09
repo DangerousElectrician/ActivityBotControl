@@ -21,8 +21,7 @@ class robotControl:
 		self.ticks[0] = self.com.readInt32()
 		self.ticks[1] = self.com.readInt32()
 		self.ping = self.com.readIntn(2)
-		self.whisker[0] = self.com.readInt32()
-		self.whisker[1] = self.com.readInt32()
+		self.whisker = self.com.readIntn(1)
 		
 	def startSensors(self):
 		self.com.write(b'0')
