@@ -49,3 +49,20 @@ int rxInt32()
   }
   return received;
 }  
+
+int rxIntn(int n)
+{
+  int received = 0;
+  for(int j = 0; j < n; j++)
+  {
+    received += fdserial_rxTime(conn, tout)<<(8*j);
+  }
+  return received;
+}  
+
+int rxInt8()
+{
+  int received = fdserial_rxTime(conn, tout);
+  if(received & 128) received |= 0xFFFFFF00;
+  return received;
+}  

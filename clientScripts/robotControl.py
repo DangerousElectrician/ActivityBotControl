@@ -65,5 +65,5 @@ class robotControl:
 		
 	def driveSpeed(self,l,r):
 		self.com.write([132])
-		self.com.writeInt32(l)
-		self.com.writeInt32(r)
+		self.com.writeBytes(1,l)
+		self.com.writeBytes(1,r)

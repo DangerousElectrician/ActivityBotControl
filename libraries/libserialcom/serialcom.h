@@ -37,3 +37,7 @@ int rxCommand();
  *@returns received integer
  */
 int rxInt32();
+
+int rxIntn(int n);
+
+int rxInt8();

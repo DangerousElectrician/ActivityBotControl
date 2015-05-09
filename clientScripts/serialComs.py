@@ -9,7 +9,7 @@ class serialComs():
 	def write(self, byte):
 		self.ser.write(byte)
 		
-	def writeBytes(self,n):
+	def writeBytes(self,n,i):
 		self.ser.write((i).to_bytes(n,byteorder='little',signed=True))
 		
 	def writeInt32(self, i):

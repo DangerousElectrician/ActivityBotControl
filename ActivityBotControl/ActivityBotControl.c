@@ -93,9 +93,9 @@ int main()
         break;
         }        
       case 132: //recieve drive speed from computer
-        drive_speed(rxInt32(),rxInt32());
+        drive_speed(rxInt8(),rxInt8());
         break;
-     
+        
       case 'p':
         __builtin_propeller_clkset(0x80); //reboot
         break;
