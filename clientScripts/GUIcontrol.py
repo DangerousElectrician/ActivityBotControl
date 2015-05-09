@@ -68,11 +68,12 @@ def stopScn():
 	stopScan= True
 	
 def main():
-	Binit = tkinter.Button(top, text ="init", command = init)
-	Bscan = tkinter.Button(top, text ="scan", command = startPlot)
-	Bsscan = tkinter.Button(top, text ="stop scan", command = stopScn)
-	Boff = tkinter.Button(top, text ="off", command = off)
-	Breset = tkinter.Button(top, text ="reset", command = rob.reset)
+	frame = tkinter.Frame(top)#, width=200, height=100)
+	Binit = tkinter.Button(frame, text ="init", command = init, height = 5, width = 10)
+	Bscan = tkinter.Button(frame, text ="scan", command = startPlot, height = 5, width = 10)
+	Bsscan = tkinter.Button(frame, text ="stop scan", command = stopScn, height = 5, width = 10)
+	Boff = tkinter.Button(frame, text ="off", command = off, height = 5, width = 10)
+	Breset = tkinter.Button(frame, text ="reset", command = rob.reset, height = 5, width = 10)
 
 		
 	speed = 15
@@ -113,7 +114,6 @@ def main():
 			rob.driveSpeed(0,0)
 		direcOn[3]=False
 	
-	frame = tkinter.Frame(top, width=200, height=100)
 	frame.bind("<KeyRelease-w>", stopforward)
 	frame.bind("<KeyPress-w>", goforward)
 	frame.bind("<KeyRelease-a>", stopleft)
@@ -126,11 +126,11 @@ def main():
 
 	frame.pack()
 	
-	Binit.pack()
-	Boff.pack()
-	Bscan.pack()
-	Bsscan.pack()
-	Breset.pack()
+	Binit.grid(row=0, column=0)
+	Boff.grid(row=0, column=1)
+	Bscan.grid(row=1, column=0)
+	Bsscan.grid(row=1, column=1)
+	Breset.grid(row=2, column=0)
 	top.after(10,readSensors)
 	top.mainloop()
 	

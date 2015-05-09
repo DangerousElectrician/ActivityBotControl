@@ -20,7 +20,7 @@ class robotControl:
 		self.pos[2], = self.com.readFloat()
 		self.ticks[0] = self.com.readInt32()
 		self.ticks[1] = self.com.readInt32()
-		self.ping = self.com.readInt32()
+		self.ping = self.com.readIntn(2)
 		self.whisker[0] = self.com.readInt32()
 		self.whisker[1] = self.com.readInt32()
 		

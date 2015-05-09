@@ -21,7 +21,7 @@ class serialComs():
 	def readFloat(self):
 		return struct.unpack('f', self.ser.read(4))
 
-	def readBytes(self,n):
+	def readIntn(self,n):
 		return int.from_bytes(self.ser.read(n), byteorder='little',signed=True)
 		
 	def flushInput(self):

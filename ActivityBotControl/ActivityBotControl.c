@@ -80,16 +80,18 @@ int main()
         break;
      
       case 131:
+        {
         txFloat(getXpos());
         txFloat(getYpos());
         txFloat(getThrad());
         txInt32(getTicksL());        
         txInt32(getTicksR());        
-        txInt32(getPing());        
+        int pung = getPing();
+        txBytes(2,&pung);        
         txInt32(getWhiskerL());        
         txInt32(getWhiskerR());
         break;
-        
+        }        
       case 132: //recieve drive speed from computer
         drive_speed(rxInt32(),rxInt32());
         break;
