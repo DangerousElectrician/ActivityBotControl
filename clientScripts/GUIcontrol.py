@@ -51,7 +51,7 @@ def plotData(initth):
 	print(rob.getPingcm())
 	update_line(h, rob.getPingcm()*cos(rob.getTheta())+(rob.getPos()[0])/3.25, rob.getPingcm()*sin(rob.getTheta())+(rob.getPos()[1])/3.25)
 	if(stopScan):#(rob.getTheta()-initth)>2*math.pi):
-		rob.driveSpeed(0,0)
+		#rob.driveSpeed(0,0)
 		#print(ra,th)
 		
 		#r= np.array(ra)
