@@ -6,7 +6,7 @@ import numpy as np
 from pylab import *
 
 top = tkinter.Tk()
-rob = robotControl.robotControl(sys.argv[1], 9600, timeout=1)
+rob = robotControl.robotControl(sys.argv[1], 9600, timeout=2)
 
 def init():
 	rob.startSensors()
@@ -26,6 +26,7 @@ def update_line(hl, new_datax, new_datay):
 	hl.set_ydata(np.append(hl.get_ydata(), new_datay))
 	gca().relim()
 	gca().autoscale_view()
+	axis('equal')
 	draw()
 
 	
