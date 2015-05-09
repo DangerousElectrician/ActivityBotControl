@@ -74,7 +74,8 @@ def main():
 	Bsscan = tkinter.Button(frame, text ="stop scan", command = stopScn, height = 5, width = 10)
 	Boff = tkinter.Button(frame, text ="off", command = off, height = 5, width = 10)
 	Breset = tkinter.Button(frame, text ="reset", command = rob.reset, height = 5, width = 10)
-
+	BstartWander = tkinter.Button(frame, text ="wander", command = rob.startWander, height = 5, width = 10)
+	BstopWander = tkinter.Button(frame, text ="stop wander", command = rob.stopWander, height = 5, width = 10)
 		
 	speed = 15
 	direcOn = [False,False,False,False]
@@ -130,7 +131,9 @@ def main():
 	Boff.grid(row=0, column=1)
 	Bscan.grid(row=1, column=0)
 	Bsscan.grid(row=1, column=1)
-	Breset.grid(row=2, column=0)
+	BstartWander.grid(row=2, column=0)
+	BstopWander.grid(row=2, column=1)
+	Breset.grid(row=3, column=0)
 	top.after(10,readSensors)
 	top.mainloop()
 	

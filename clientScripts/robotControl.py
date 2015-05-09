@@ -39,6 +39,12 @@ class robotControl:
 	def stopDrive(self):
 		self.com.write([130])		
 		
+	def startWander(self):
+		self.com.write(b'z')
+		
+	def stopWander(self):
+		self.com.write(b'x')
+		
 	def getWhisker(self):
 		return self.whisker
 		
