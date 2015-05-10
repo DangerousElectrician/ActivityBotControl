@@ -17,9 +17,21 @@ def off():
 	rob.stopSensors()
 	rob.stopDrive()
 
+global updateSensors
+updateSensors = False
 def readSensors():
 	rob.updateSensors()
-	top.after(50,readSensors)
+	if(updateSensors):
+		top.after(50,readSensors)
+		
+def stopReadSensors():
+	global updateSensors
+	updateSensors = False
+	
+def startReadSensors():
+	global updateSensors
+	updateSensors = True
+	top.after(1, readSensors)
 	
 h, = plot([], [], 'bo')
 def update_line(hl, new_datax, new_datay):
@@ -50,7 +62,7 @@ def plotData(initth):
 	#th.append(rob.getTheta())
 	print(rob.getPingcm())
 	update_line(h, rob.getPingcm()*cos(rob.getTheta())+(rob.getPos()[0])/3.25, rob.getPingcm()*sin(rob.getTheta())+(rob.getPos()[1])/3.25)
-	if(stopScan):#(rob.getTheta()-initth)>2*math.pi):
+	if(not stopScan):#(rob.getTheta()-initth)>2*math.pi):
 		#rob.driveSpeed(0,0)
 		#print(ra,th)
 		
@@ -60,8 +72,8 @@ def plotData(initth):
 		#ax = subplot(111, polar=True)
 		#c = scatter(theta, r)
 		#plt.show()
-	else:
-		top.after(1,lambda:plotData(initth))
+	#else:
+		top.after(50,lambda:plotData(initth))
 	
 def stopScn():
 	global stopScan
@@ -76,6 +88,8 @@ def main():
 	Breset = tkinter.Button(frame, text ="reset", command = rob.reset, height = 5, width = 10)
 	BstartWander = tkinter.Button(frame, text ="wander", command = rob.startWander, height = 5, width = 10)
 	BstopWander = tkinter.Button(frame, text ="stop wander", command = rob.stopWander, height = 5, width = 10)
+	BstartReadSensors = tkinter.Button(frame, text ="update\nsensors", command = startReadSensors, height = 5, width = 10)
+	BstopReadSensors = tkinter.Button(frame, text ="stop update\nsensors", command = stopReadSensors, height = 5, width = 10)
 		
 	speed = 15
 	direcOn = [False,False,False,False]
@@ -124,17 +138,18 @@ def main():
 	frame.bind("<KeyRelease-d>", stopright)
 	frame.bind("<KeyPress-d>", goright)
 	frame.focus_set()
-
-	frame.pack()
 	
 	Binit.grid(row=0, column=0)
 	Boff.grid(row=0, column=1)
-	Bscan.grid(row=1, column=0)
-	Bsscan.grid(row=1, column=1)
-	BstartWander.grid(row=2, column=0)
-	BstopWander.grid(row=2, column=1)
-	Breset.grid(row=3, column=0)
-	top.after(10,readSensors)
+	BstartReadSensors.grid(row=1, column=0)
+	BstopReadSensors.grid(row=1, column=1)
+	Bscan.grid(row=2, column=0)
+	Bsscan.grid(row=2, column=1)
+	BstartWander.grid(row=3, column=0)
+	BstopWander.grid(row=3, column=1)
+	Breset.grid(row=4, column=0)
+
+	frame.pack()
 	top.mainloop()
 	
 main()
