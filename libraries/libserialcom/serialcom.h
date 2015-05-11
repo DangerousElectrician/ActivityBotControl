@@ -17,11 +17,9 @@ void startComs(int rxpin, int txpin, int baudrate, int timeout);
  */
 void txInt32(int i);
 
-void txFloat(float f);
+void txFloat(float f); //send 32-bit float
 
-void txBytes(int n, char *b);
-
-//void txChar(
+void txBytes(int n, char *b); //send n bytes
 
 /**
  *@brief receive a byte from the UART. This function is blocking.
@@ -38,6 +36,6 @@ int rxCommand();
  */
 int rxInt32();
 
-int rxIntn(int n);
+int rxIntn(int n); //receive unsigned int of n bytes
 
-int rxInt8();
+int rxInt8(); //receive signed 8-bit integer
