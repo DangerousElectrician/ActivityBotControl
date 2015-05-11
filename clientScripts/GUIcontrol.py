@@ -24,7 +24,7 @@ xbuf=[]
 ybuf=[]
 xposbuf=[]
 yposbuf=[]
-def readSensors():
+def readSensors():	#retrieves sensor data from robot
 	rob.updateSensors()
 	xbuf.append(rob.getPingcm()*cos(rob.getTheta())+(rob.getPos()[0])/3.25)
 	ybuf.append(rob.getPingcm()*sin(rob.getTheta())+(rob.getPos()[1])/3.25)
@@ -44,7 +44,7 @@ def startReadSensors():
 	top.after(1, readSensors)
 	
 h,g = plot([], [], 'ro',[],[],'bs') #THIS LINE IS CAUSING PROBLEMS WITH CLOSING THE PROGRAM
-def update_line(hl, new_datax, new_datay):
+def update_line(hl, new_datax, new_datay):	#draws more points on graph
 	hl.set_xdata(np.append(hl.get_xdata(), new_datax))
 	hl.set_ydata(np.append(hl.get_ydata(), new_datay))
 	gca().relim()
@@ -65,7 +65,7 @@ def startPlot():
 	plotData(rob.getTheta())
 
 	
-def plotData(initth):
+def plotData(initth):	#does some of the data handling for graphing
 	update_line(h, xbuf, ybuf)
 	xbuf.clear()
 	ybuf.clear()
