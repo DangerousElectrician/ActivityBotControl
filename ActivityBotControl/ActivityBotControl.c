@@ -48,21 +48,21 @@ int main()
         txInt32(42);
         break;
         
-      case '0':
+      case '0': //start sensor updater
         startSensor(PING_PIN, LEFT_WHISKER, RIGHT_WHISKER);
         txInt32(42);
         break;
         
-      case 128:
+      case 128: //stop sensor updater
         stopSensor();
         break;
         
-      case 129:
+      case 129: //start drive cog
         drive_open();
         txInt32(42);
         break;
         
-      case 130:
+      case 130:  //stop drive cog
         drive_close();
         break;
 
@@ -75,11 +75,11 @@ int main()
         drive_speed(0,0);
         break;
         
-      case 'f': //send sensor data
+      case 'f': //send sensor data over usb serial
         print("p %d\tpc %d\tpi %d\twl %d\twr %d\ttl %d\ttr %d\n",getPing(), getPingcm(), getPingin(), getWhiskerL(), getWhiskerR(), getTicksL(), getTicksR());
         break;
      
-      case 131:
+      case 131: //send sensor data over bluetooth
         {
         txFloat(getXpos());
         txFloat(getYpos());
