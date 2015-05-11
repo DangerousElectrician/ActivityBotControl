@@ -60,35 +60,19 @@ stopscan = False
 def startPlot():
 	ion()
 	show()
-	#rob.driveSpeed(-5,5)
 	global stopScan
 	stopScan = False
 	plotData(rob.getTheta())
 
 	
-#ra= []
-#th = []
 def plotData(initth):
-	#print(str(math.degrees(rob.getTheta()))+"\t"+str(rob.getPing()))
-	#ra.append(rob.getPingcm())
-	#th.append(rob.getTheta())
 	update_line(h, xbuf, ybuf)
 	xbuf.clear()
 	ybuf.clear()
 	update_line(g,xposbuf,yposbuf)
 	yposbuf.clear()
 	xposbuf.clear()
-	if(not stopScan):#(rob.getTheta()-initth)>2*math.pi):
-		#rob.driveSpeed(0,0)
-		#print(ra,th)
-		
-		#r= np.array(ra)
-		#theta = np.array(th)
-
-		#ax = subplot(111, polar=True)
-		#c = scatter(theta, r)
-		#plt.show()
-	#else:
+	if(not stopScan):
 		top.after(200,lambda:plotData(initth))
 	
 def stopScn():
