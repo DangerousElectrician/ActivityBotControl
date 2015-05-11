@@ -4,43 +4,43 @@
 #include "ping.h"
 
 
-int getPing();
+int getPing(); //get ping sensor data in microseconds
 
-int getPingcm();
+int getPingcm(); //get ping sensor data in centimeters
 
-int getPingin();
+int getPingin(); //get ping sensor data in inches
 
-int getTicksL();
+int getTicksL(); //get ticks of left wheel
 
-int getTicksR();
+int getTicksR(); //get ticks of right wheel
 
-int getWhiskerL();
+int getWhiskerL(); //get left whisker state
 
-int getWhiskerR();
+int getWhiskerR(); //get right whisker state
 
-int *startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin);
+int *startSensor(int pingPin, int leftWhiskerPin, int rightWhiskerPin); //start sensor updater
 
-void stopSensor();
+void stopSensor(); //stop sensor updater
 
-void sensorUpdater();
-
-
-float getXpos();
-
-float getYpos();
-
-float getTh();
+void sensorUpdater();  //sensor updater function, runs in own cog
 
 
-int getXint();
+float getXpos(); //get x position in ticks
 
-int getYint();
+float getYpos(); //get y position in ticks
 
-int getThint();
+float getTh();  //get theta of robot in radians
 
 
-float getXcm();
+int getXint(); //get x position in integer ticks
 
-float getYcm();
+int getYint(); //get x position in integer ticks
 
-float getThdeg();
+int getThint();   //get integer theta of robot
+
+
+float getXcm(); //get x position in centimeters 
+
+float getYcm();  //get y position in centimeters
+
+float getThdeg();  //get theta of robot in degrees
