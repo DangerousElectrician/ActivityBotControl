@@ -45,16 +45,12 @@ def startReadSensors():
 	
 h,g = plot([], [], 'ro',[],[],'bs') #THIS LINE IS CAUSING PROBLEMS WITH CLOSING THE PROGRAM
 def update_line(hl, new_datax, new_datay):
-	def doStuff():
-		hl.set_xdata(np.append(hl.get_xdata(), new_datax))
-		hl.set_ydata(np.append(hl.get_ydata(), new_datay))
-		gca().relim()
-		gca().autoscale_view()
-		#axis('equal')
-		draw()
-	#t = threading.Thread(target=doStuff)
-	#t.start()
-	doStuff()
+	hl.set_xdata(np.append(hl.get_xdata(), new_datax))
+	hl.set_ydata(np.append(hl.get_ydata(), new_datay))
+	gca().relim()
+	gca().autoscale_view()
+	axis('equal')
+	draw()
 	
 
 	
