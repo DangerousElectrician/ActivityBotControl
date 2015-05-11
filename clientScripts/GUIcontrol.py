@@ -48,7 +48,8 @@ def update_line(hl, new_datax, new_datay):
 	hl.set_ydata(np.append(hl.get_ydata(), new_datay))
 	gca().relim()
 	gca().autoscale_view()
-	axis('equal')
+	gca().set_aspect('equal', 'datalim', 'C')
+	gca().apply_aspect()
 	draw()
 
 	
