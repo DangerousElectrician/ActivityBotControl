@@ -4,7 +4,6 @@ import robotControl
 import math
 import numpy as np
 from pylab import *
-import threading
 
 top = tkinter.Tk()
 
