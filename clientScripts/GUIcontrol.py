@@ -19,10 +19,19 @@ def off():
 
 global updateSensors
 updateSensors = False
+xbuf=[]
+ybuf=[]
+xposbuf=[]
+yposbuf=[]
 def readSensors():
 	rob.updateSensors()
+	xbuf.append(rob.getPingcm()*cos(rob.getTheta())+(rob.getPos()[0])/3.25)
+	ybuf.append(rob.getPingcm()*sin(rob.getTheta())+(rob.getPos()[1])/3.25)
+	xposbuf.append(rob.getPos()[0])
+	yposbuf.append(rob.getPos()[1])
+	print(rob.getPingcm())
 	if(updateSensors):
-		top.after(50,readSensors)
+		top.after(1,readSensors)
 		
 def stopReadSensors():
 	global updateSensors
@@ -33,7 +42,7 @@ def startReadSensors():
 	updateSensors = True
 	top.after(1, readSensors)
 	
-h, = plot([], [], 'bo')
+h, = plot([], [], 'bo') #THIS LINE IS CAUSING PROBLEMS
 def update_line(hl, new_datax, new_datay):
 	hl.set_xdata(np.append(hl.get_xdata(), new_datax))
 	hl.set_ydata(np.append(hl.get_ydata(), new_datay))
@@ -60,8 +69,9 @@ def plotData(initth):
 	#print(str(math.degrees(rob.getTheta()))+"\t"+str(rob.getPing()))
 	#ra.append(rob.getPingcm())
 	#th.append(rob.getTheta())
-	print(rob.getPingcm())
-	update_line(h, rob.getPingcm()*cos(rob.getTheta())+(rob.getPos()[0])/3.25, rob.getPingcm()*sin(rob.getTheta())+(rob.getPos()[1])/3.25)
+	update_line(h, xbuf, ybuf)
+	xbuf.clear()
+	ybuf.clear()
 	if(not stopScan):#(rob.getTheta()-initth)>2*math.pi):
 		#rob.driveSpeed(0,0)
 		#print(ra,th)
@@ -73,11 +83,12 @@ def plotData(initth):
 		#c = scatter(theta, r)
 		#plt.show()
 	#else:
-		top.after(50,lambda:plotData(initth))
+		top.after(200,lambda:plotData(initth))
 	
 def stopScn():
 	global stopScan
 	stopScan= True
+	ioff()
 	
 def main():
 	frame = tkinter.Frame(top)#, width=200, height=100)
@@ -150,6 +161,10 @@ def main():
 	Breset.grid(row=4, column=0)
 
 	frame.pack()
+	def quit():
+		close()
+		#top.destroy()
+	top.protocol("WM_DELETE_WINDOW", quit)
 	top.mainloop()
 	
 main()
