@@ -4,6 +4,7 @@ import robotControl
 import math
 import numpy as np
 from pylab import *
+import threading
 
 top = tkinter.Tk()
 
@@ -27,8 +28,8 @@ def readSensors():
 	rob.updateSensors()
 	xbuf.append(rob.getPingcm()*cos(rob.getTheta())+(rob.getPos()[0])/3.25)
 	ybuf.append(rob.getPingcm()*sin(rob.getTheta())+(rob.getPos()[1])/3.25)
-	xposbuf.append(rob.getPos()[0])
-	yposbuf.append(rob.getPos()[1])
+	xposbuf.append(rob.getPos()[0]/3.25)
+	yposbuf.append(rob.getPos()[1]/3.25)
 	print(rob.getPingcm())
 	if(updateSensors):
 		top.after(1,readSensors)
@@ -42,7 +43,7 @@ def startReadSensors():
 	updateSensors = True
 	top.after(1, readSensors)
 	
-h, = plot([], [], 'bo') #THIS LINE IS CAUSING PROBLEMS
+h,g = plot([], [], 'ro',[],[],'bs') #THIS LINE IS CAUSING PROBLEMS WITH CLOSING THE PROGRAM
 def update_line(hl, new_datax, new_datay):
 	hl.set_xdata(np.append(hl.get_xdata(), new_datax))
 	hl.set_ydata(np.append(hl.get_ydata(), new_datay))
@@ -51,6 +52,7 @@ def update_line(hl, new_datax, new_datay):
 	gca().set_aspect('equal', 'datalim', 'C')
 	gca().apply_aspect()
 	draw()
+	
 
 	
 global stopScan
@@ -73,6 +75,9 @@ def plotData(initth):
 	update_line(h, xbuf, ybuf)
 	xbuf.clear()
 	ybuf.clear()
+	update_line(g,xposbuf,yposbuf)
+	yposbuf.clear()
+	xposbuf.clear()
 	if(not stopScan):#(rob.getTheta()-initth)>2*math.pi):
 		#rob.driveSpeed(0,0)
 		#print(ra,th)
